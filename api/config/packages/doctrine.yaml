@@ -6,14 +6,31 @@ doctrine:
         # either here or in the DATABASE_URL env var (see .env file)
         driver: 'postgresql'
         server_version: '12'
+        types:
+            uuid: 'Ramsey\Uuid\Doctrine\UuidType'
+            price: 'App\Infrastructure\Doctrine\Type\Price'
+            entryType: 'App\Infrastructure\Doctrine\Type\EntryType'
+   
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            App:
+            User:
                 is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+                type: xml
+                dir: '%kernel.project_dir%/config/doctrine/user'
+                prefix: 'App\User\Entity'
+                alias: User
+            Entry:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/config/doctrine/entry'
+                prefix: 'App\Entry\Entity'
+                alias: Entry
+            Voucher:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/config/doctrine/voucher'
+                prefix: 'App\Voucher\Entity'
+                alias: Voucher
